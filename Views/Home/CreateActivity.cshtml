@@ -1,0 +1,55 @@
+@model ActivityCenter
+<partial name="_Nav"></partial>
+<div class="jumbotron">
+    <h1>
+    Create an Activity
+</h1>
+<p>
+    Create Your Activity So Participants Should be Able to Join
+</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <form asp-action="AddActivity" method="post" class="form-group">
+            <div class="col-lg-6">
+                <p><span asp-validation-for="ActivityTitle" class="text-danger"></span></p>
+                <p>
+                    <label asp-for="ActivityTitle"></label>
+                    <input class="form-control" asp-for=" ActivityTitle">
+                </p>
+                <p><span asp-validation-for="ActivityTime"class="text-danger"></span></p>
+                <p>
+                    <label asp-for="ActivityTime"></label>
+                    <input class="form-control" asp-for="ActivityTime">
+                </p>
+                <p><span asp-validation-for="ActivityDate"class="text-danger"></span></p>
+                <p>
+                    <label asp-for="ActivityDate"></label>
+                    <input class="form-control" asp-for="ActivityDate">
+                </p>
+                <p><span asp-validation-for="ActivityDuration"class="text-danger"></span></p>
+                <p>
+                    <label asp-for="ActivityDuration"></label>
+                    <input class="form-control" asp-for=" ActivityDuration">
+                </p>
+                <p>
+                     <label asp-for="Unit"></label>
+                     <select asp-for="Unit" class="form-control">
+                         <option value="Hours">Hours</option>
+                         <option value="Days">Days</option>
+                         <option value="Minutes">Minutes</option>
+                     </select>
+                </p>
+                <p><span asp-validation-for="ActivityDescription"class="text-danger"></span></p>
+                <p>
+                    <label asp-for="ActivityDescription"></label>
+                    <textarea class="form-control" asp-for=" ActivityDescription" id="" cols="30" rows="4"></textarea>
+                </p>
+                <div class="text-right">
+                 <input type="submit" class="btn btn-outline-success" value="Create Activity ">
+                </div>
+        </form>
+        </div>
+    </div>
+</div>

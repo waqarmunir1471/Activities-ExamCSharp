@@ -1,0 +1,48 @@
+<partial  name="_Nav"></partial>
+@model List<ActivityCenter>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Activity</th>
+            <th>Date and Time</th>
+            <th>Duration</th>
+            <th>Event Coordinator</th>
+            <th>No. of Participants</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if(item.ActivityDate > DateTime.Now){
+                 <tr>
+                <td><a href="/DetailsActivity/@item.ActivityId">@item.ActivityTitle</a></td>
+                <td>@item.ActivityDate.ToShortDateString()  @@ @item.ActivityTime.ToShortTimeString()</td>
+                <td>@item.ActivityDuration @item.Unit</td>
+                <td>@item.ActivityCreator.FirstName</td>
+                <td>@item.Participants.Count()</td>
+                <td>
+                     @if(item.ActivityCreator.UserId == ViewBag.User.UserId)
+                {
+                    <a href="/Delete/@item.ActivityId" role="button" class="btn btn-danger btn-block">Delete</a>
+                }else{
+                    if(item.Participants.All(g=>g.UserId != ViewBag.User.UserId)){
+                    <a href="/Join/@item.ActivityId/@ViewBag.User.UserId" class="btn btn-warning btn-block" role="button">Join</a>
+                }
+                if(item.Participants.Any(s=>s.UserId == ViewBag.User.UserId)){
+                    <a href="/Leave/@item.ActivityId/@ViewBag.User.UserId" class="btn btn-outline-secondary btn-block" role="button">Leave</a>
+                    
+                }
+                }
+                </td>
+        </tr>
+
+            }
+           
+        }
+        
+    </tbody>
+</table>
+<div class="text-right">
+    <a href="/CreateActivity" class="btn btn-outline-info">Add New Activity</a>
+</div>
